@@ -14,6 +14,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+logger.info("FastAPI calculator starting")
 
 # Setup templates directory
 templates = Jinja2Templates(directory="templates")
@@ -70,6 +71,7 @@ async def add_route(operation: OperationRequest):
     """
     try:
         result = add(operation.a, operation.b)
+        logger.info("add: %s + %s = %s", operation.a, operation.b, result)
         return OperationResponse(result=result)
     except Exception as e:
         logger.error(f"Add Operation Error: {str(e)}")
@@ -82,6 +84,7 @@ async def subtract_route(operation: OperationRequest):
     """
     try:
         result = subtract(operation.a, operation.b)
+        logger.info("subtract: %s - %s = %s", operation.a, operation.b, result)
         return OperationResponse(result=result)
     except Exception as e:
         logger.error(f"Subtract Operation Error: {str(e)}")
@@ -94,6 +97,7 @@ async def multiply_route(operation: OperationRequest):
     """
     try:
         result = multiply(operation.a, operation.b)
+        logger.info("multiply: %s * %s = %s", operation.a, operation.b, result)
         return OperationResponse(result=result)
     except Exception as e:
         logger.error(f"Multiply Operation Error: {str(e)}")
@@ -106,6 +110,7 @@ async def divide_route(operation: OperationRequest):
     """
     try:
         result = divide(operation.a, operation.b)
+        logger.info("divide: %s / %s = %s", operation.a, operation.b, result)
         return OperationResponse(result=result)
     except ValueError as e:
         logger.error(f"Divide Operation Error: {str(e)}")
